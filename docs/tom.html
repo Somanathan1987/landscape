@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Application landscape - test</title>
+	<link rel="stylesheet" href="./landscape.css" media="all">
+</head>
+
+<body>
+	<header>
+		<h2>Mythical bank</h2>
+		<h1>Application landscape</h1>
+	</header>
+	<table class="landscape">
+		<tbody id="lineOfBusiness">
+		</tbody>
+	</table>
+
+	<script src="./dist/landscape.min.js"></script>
+	<script>
+		// extract any URL parameters to define dimensions
+		const x = "product";
+		const y = "capability";
+		let data = undefined;
+		let scenario = undefined;
+
+		// load the applications data
+		window.fetch("./data/mythicalBank.json").then(response => response.json()).then(json => {
+			data = landscape.filterByDate(convertRawJson(json), new Date());
+
+			// extract the axes from the application data
+			const xAxis = landscape.getAxis(data, x);
+			const yAxis = landscape.getAxis(data, y);
+
+			// find the optimum layout scenarios
+			const scenarios = landscape.tom(data, xAxis, yAxis);
+
+			// select the preferred scenario
+			if (scenarios.length !== 0) {
+				scenario = scenarios[0];
+
+				displayAtDate(new Date());
+			}
+		});
+
+		function displayAtDate(date) {
+			// get the prepared table with applications filtered by the date of interest
+			const table = landscape.getTable(landscape.filterByDate(data, date), scenario.x, scenario.y);
+
+			// update the table
+			document.getElementById("lineOfBusiness").innerHTML = landscape.getHTML(table);
+		}
+
+		// alternative function to considering all permutations of the y axis; to pass into landscape.getOptimalAxes
+		function capabilities(values) {
+			const capabilities = ["Market gateway", "Order management", "Order execution", "Lifecycle management", "Confirmations", "Clearing", "Settlement", "Payments"];
+
+			return [capabilities.filter(capability => values.indexOf(capability) !== -1)];
+		}
+
+		// map raw JSON data to format required in layout engine (transform date strings into dates)
+		function convertRawJson(json) {
+			return json.map(app => {
+				return {
+					detail: app.detail,
+					usage: app.usage.map(use => {
+						return {
+							product: use.product,
+							capability: use.capability,
+							location: use.location,
+							commissioned: use.commissioned ? new Date(use.commissioned) : undefined,
+							decommissioned: use.decommissioned ? new Date(use.decommissioned) : undefined,
+							status: use.status
+						};
+					})
+				};
+			});
+		}
+	</script>
+</body>
+
+</html>
