@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Landscape View</title>
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/landscape.css">
+<script type="text/javascript" src="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/promise.min.js"></script>	
+<script type="text/javascript" src="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/fetch.umd.js"></script>
+<script type="text/javascript" src="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/landscape.min.js"></script>
+<script type="text/javascript" src="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/landscapeview.js"></script>
+<!--<script type="text/javascript" src="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/TradingITLandscape.js"></script>-->
+<script type="text/javascript" src="https://pulse.trafigura.com/workspaces/strategy-architecture-and-technology-services/Architecture/CloudPortfolio/SiteAssets/Trading IT Landscape/rocket-loader.min.js"></script>
+</head>
+
+<body>
+	<header>
+		<h2>Trading IT Landscape View</h2>
+		<h1>Application landscape</h1>
+	</header>
+	<table class="landscape">
+		<tbody id="lineOfBusiness">
+		</tbody>
+	</table>
+	<table class="timeline">
+		<tbody>
+			<tr>
+				<td colspan="3">
+					<label for="xAxisSelector">x axis:</label>
+					<select id="xAxisSelector" onchange="determineAxis()">
+						<option value="capability">Capability</option>
+						<option value="location">Location</option>
+						<option value="product" selected="selected">Product</option>
+						<option value="status">Status</option>
+					</select>
+					<label for="xAxisOptimised">optimised:</label>
+					<input type="checkbox" id="xAxisOptimised" onchange="determineAxis()" checked="checked"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<label for="yAxisSelector">y axis:</label>
+					<select id="yAxisSelector" onchange="determineAxis(data,tempval)">
+						<option value="capability" selected="selected">Capability</option>
+						<option value="location">Location</option>
+						<option value="product">Product</option>
+						<option value="status">Status</option>
+					</select>
+					<label for="yAxisOptimised">optimised:</label>
+					<input type="checkbox" id="yAxisOptimised" onchange="determineAxis()" checked="checked"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">View as of: <span id="dateOfInterest"></span></td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="range" min="-1095" max="1096" value="0" class="slider" id="slider" oninput="displayAtDate()" onchange="displayAtDate()"/></td>
+			</tr>
+			<tr>
+				<td id="earliestDate">Earliest</td>
+				<td id="todaysDate">Today</td>
+				<td id="latestDate">Latest</td>
+			</tr>
+		</tbody>
+	</table>
+<!--<table class="timeline">
+		<tbody>
+			<tr>
+				<td colspan="3">
+					<label for="xAxisSelector">x axis:</label>
+					<select id="xAxisSelector" onchange="determineAxis()">
+						<option value="capability">Capability</option>
+						<option value="location">Location</option>
+						<option value="product" selected="selected">Product</option>
+						<option value="status">Status</option>
+					</select>
+					<label for="xAxisOptimised">optimised:</label>
+					<input type="checkbox" id="xAxisOptimised" onchange="determineAxis()" checked="checked"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<label for="yAxisSelector">y axis:</label>
+					<select id="yAxisSelector" onchange="determineAxis(data,tempval)">
+						<option value="capability" selected="selected">Capability</option>
+						<option value="location">Location</option>
+						<option value="product">Product</option>
+						<option value="status">Status</option>
+					</select>
+					<label for="yAxisOptimised">optimised:</label>
+					<input type="checkbox" id="yAxisOptimised" onchange="determineAxis()" checked="checked"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">View as of: <span id="dateOfInterest"></span></td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="range" min="-1095" max="1096" value="0" class="slider" id="slider" oninput="displayAtDate()" onchange="displayAtDate()"/></td>
+			</tr>
+			<tr>
+				<td id="earliestDate">Earliest</td>
+				<td id="todaysDate">Today</td>
+				<td id="latestDate">Latest</td>
+			</tr>
+		</tbody>
+	</table>-->
+</body>
+</html>
